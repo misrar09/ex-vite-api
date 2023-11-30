@@ -1,21 +1,20 @@
 <script>
 import AppHeader from "./components/AppHeader.vue"
-import AppMainContent from "./components/AppMainContent.vue"
+import AppCard from "./components/AppCard.vue"
 import AppFooter from "./components/AppFooter.vue"
 import axios from 'axios';
-import { store } from "./components/store"
+import { store } from "./components/store";
 
 export default {
   components: {
     AppHeader,
-    AppMainContent,
+    AppCard,
     AppFooter,
     store,
     axios,
   },
   data() {
     return {
-      index: 0,
       breweries: [],
 
     }
@@ -23,8 +22,8 @@ export default {
   methods: {
     getApiResults() {
       axios.get("https://api.openbrewerydb.org/v1/breweries?by_country=ireland&per_page=10").then(resp => {
-        this.breweries = resp.data
-        /* this.store.breweries = outcome.data.array */
+        this.breweries = resp.data;
+
         console.log(this.breweries);
       })
     }
@@ -40,15 +39,14 @@ export default {
 
 <template>
   <AppHeader />
-  <main>
-    <div v-for="brewery in breweries">
-      <p>{{ brewery.name }}</p>
+  <AppCard v-for="brewery in breweries" :name="brewery.name" :city="brewery.city" :country="brewery.country" />
+  <div>
+    <!--       <p>{{ brewery.name }}</p>
       <p>{{ brewery.city }}</p>
-      <p>{{ brewery.country }}</p>
+      <p>{{ brewery.country }}</p> -->
 
 
-    </div>
-  </main>
+  </div>
   <footer></footer>
 </template>
 
