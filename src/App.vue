@@ -3,28 +3,28 @@ import AppHeader from "./components/AppHeader.vue"
 import AppCard from "./components/AppCard.vue"
 import AppFooter from "./components/AppFooter.vue"
 import axios from 'axios';
-import { store } from "./components/store";
+import { store } from "./store.js";
 
 export default {
   components: {
     AppHeader,
     AppCard,
     AppFooter,
-    store,
     axios,
   },
   data() {
     return {
-      breweries: [],
+
+      store,
 
     }
   },
   methods: {
     getApiResults() {
-      axios.get("https://api.openbrewerydb.org/v1/breweries?by_country=ireland&per_page=10").then(resp => {
-        this.breweries = resp.data;
+      axios.get(this.store.apiLink).then(resp => {
+        this.store.breweries = resp.data;
 
-        console.log(this.breweries);
+        console.log(this.store.breweries);
       })
     }
   },
@@ -39,15 +39,33 @@ export default {
 
 <template>
   <AppHeader />
-  <AppCard v-for="brewery in breweries" :name="brewery.name" :city="brewery.city" :country="brewery.country" />
-  <div>
-    <!--       <p>{{ brewery.name }}</p>
-      <p>{{ brewery.city }}</p>
-      <p>{{ brewery.country }}</p> -->
+  <div class="all_cards_wrapper">
 
 
+    <div class="all_cards">
+
+      <AppCard v-for="brewery in store.breweries" :name="brewery.name" :city="brewery.city" :country="brewery.country" />
+      <!--       <p>{{ brewery.name }}</p>
+        <p>{{ brewery.city }}</p>
+        <p>{{ brewery.country }}</p> -->
+
+
+    </div>
   </div>
   <footer></footer>
 </template>
 
-<style scoped></style>
+<style scoped>
+.all_cards_wrapper {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.all_cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  color: rgb(255, 255, 255);
+  padding: 2rem 0;
+}
+</style>

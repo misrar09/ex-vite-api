@@ -20,4 +20,9 @@ export default {
     <h1>Vue API List</h1>
 </template>
 
-<style scoped></style>
+<style scoped>
+h1 {
+    text-align: center;
+    color: brown;
+}
+</style>

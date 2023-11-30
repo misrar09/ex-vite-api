@@ -26,8 +26,9 @@ export default {
     width: 15rem;
     height: 11rem;
     margin-bottom: 2rem;
-}
+    background-color: teal;
 
+}
 
 .card p {
     font-size: 1rem;
