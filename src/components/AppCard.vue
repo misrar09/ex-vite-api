@@ -28,20 +28,20 @@ export default {
 
 <style scoped>
 .card {
-    width: 25rem;
-    height: 25rem;
+    width: 20rem;
+    height: 20rem;
     margin-bottom: 2rem;
     background-color: teal;
-
 }
 
 li {
     list-style: none;
     padding: 0.2rem 0.8rem;
+    font-size: 0.7rem;
 }
 
 .card p {
-    font-size: 1rem;
+    font-size: 0.5rem;
     padding-top: 0.5rem;
 }
 </style>
