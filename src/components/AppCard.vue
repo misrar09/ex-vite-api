@@ -30,7 +30,6 @@ export default {
 .card {
     width: 20rem;
     height: 20rem;
-    margin-bottom: 2rem;
     background-color: teal;
 }
 
