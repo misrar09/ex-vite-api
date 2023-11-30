@@ -4,7 +4,8 @@ export default {
     name: "AppCard",
 
     props: [
-        "name", "city", "country" // coming from App
+        // "name", "city", "country" // coming from App
+        "breweryData",
     ],
 
 }
@@ -12,10 +13,14 @@ export default {
 
 <template>
     <div class="card">
-        <!-- <img :src=image alt="card image"> -->
-        <h3>{{ name.toUpperCase() }}</h3>
+        <!--         <h3>{{ name.toUpperCase() }}</h3>
         <p>{{ city }}</p>
-        <p>{{ country }}</p>
+        <p>{{ country }}</p> -->
+        <ul>
+            <li v-for="(value, key) in breweryData">
+                <strong>{{ key }}:</strong> {{ value }}
+            </li>
+        </ul>
 
     </div>
 </template>
@@ -23,11 +28,16 @@ export default {
 
 <style scoped>
 .card {
-    width: 15rem;
-    height: 11rem;
+    width: 25rem;
+    height: 25rem;
     margin-bottom: 2rem;
     background-color: teal;
 
+}
+
+li {
+    list-style: none;
+    padding: 0.2rem 0.8rem;
 }
 
 .card p {

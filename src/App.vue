@@ -44,7 +44,8 @@ export default {
 
     <div class="all_cards">
 
-      <AppCard v-for="brewery in store.breweries" :name="brewery.name" :city="brewery.city" :country="brewery.country" />
+      <AppCard v-for="brewery in store.breweries" :breweryData="brewery" />
+      <!-- <AppCard v-for="brewery in store.breweries" :name="brewery.name" :city="brewery.city" :country="brewery.country" /> -->
       <!--       <p>{{ brewery.name }}</p>
         <p>{{ brewery.city }}</p>
         <p>{{ brewery.country }}</p> -->
