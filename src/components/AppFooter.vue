@@ -2,7 +2,7 @@
 
 
 export default {
-    name: "appFooter",
+    name: "AppFooter",
     components: {
 
     },

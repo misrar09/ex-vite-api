@@ -7,7 +7,6 @@ export default {
         // "name", "city", "country" // coming from App
         "breweryData",
     ],
-
 }
 </script>
 

@@ -2,6 +2,7 @@
 import AppHeader from "./components/AppHeader.vue"
 import AppCard from "./components/AppCard.vue"
 import AppFooter from "./components/AppFooter.vue"
+import AppFilter from "./components/AppFilter.vue"
 import axios from 'axios';
 import { store } from "./store.js";
 
@@ -10,6 +11,7 @@ export default {
     AppHeader,
     AppCard,
     AppFooter,
+    AppFilter,
     axios,
   },
   data() {
@@ -20,36 +22,42 @@ export default {
     }
   },
   methods: {
-    getApiResults() {
-      axios.get(this.store.apiLink).then(resp => {
+    filterApiResults(selectedType) {
+      this.getApiResults(selectedType);
+    },
+
+    getApiResults(selectedType) {
+      let filteredApiLink = this.store.apiLink;
+      if (selectedType) {
+        filteredApiLink += (filteredApiLink.includes("?") ? "&" : "?") + `by_type=${selectedType}&per_page=10`;
+      }
+
+      //console.log(filteredApiLink);
+
+      axios.get(filteredApiLink).then((resp) => {
         this.store.breweries = resp.data;
+      }).catch((error) => {
+        console.error("API Request Error:", error);
+      });
 
-        console.log(this.store.breweries);
-      })
-    }
+
+    },
   },
-
   mounted() {
-
-    this.getApiResults();
-  }
+    this.getApiResults(this.store.selectedItem);
+  },
 }
 
 </script>
 
 <template>
   <AppHeader />
+  <AppFilter @search="filterApiResults" />
   <div class="all_cards_wrapper">
-
-
     <div class="all_cards">
 
       <AppCard v-for="brewery in store.breweries" :breweryData="brewery" />
       <!-- <AppCard v-for="brewery in store.breweries" :name="brewery.name" :city="brewery.city" :country="brewery.country" /> -->
-      <!--       <p>{{ brewery.name }}</p>
-        <p>{{ brewery.city }}</p>
-        <p>{{ brewery.country }}</p> -->
-
 
     </div>
   </div>
