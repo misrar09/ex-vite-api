@@ -16,12 +16,12 @@ export default {
     methods: {
 
         filterApiType() {
-            this.$emit("search", this.store.selectedItem)
+            this.$emit("search", this.store.selectedItem) // Emit the search with the selected  type by the user
 
             //console.log(this.store.selectedItem)
         },
     },
-    emits: ["search"],
+    emits: ["search"], // // Declare the "search" event for better handling. otherwise there is a warning
 };
 
 </script>

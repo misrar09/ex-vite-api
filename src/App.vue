@@ -1,7 +1,6 @@
 <script>
 import AppHeader from "./components/AppHeader.vue"
 import AppCard from "./components/AppCard.vue"
-import AppFooter from "./components/AppFooter.vue"
 import AppFilter from "./components/AppFilter.vue"
 import axios from 'axios';
 import { store } from "./store.js";
@@ -10,7 +9,6 @@ export default {
   components: {
     AppHeader,
     AppCard,
-    AppFooter,
     AppFilter,
     axios,
   },
@@ -22,29 +20,32 @@ export default {
     }
   },
   methods: {
-    filterApiResults(selectedType) {
-      this.getApiResults(selectedType);
-    },
 
+    //Function to get Api results 
     getApiResults(selectedType) {
       let filteredApiLink = this.store.apiLink;
-      if (selectedType) {
+      if (selectedType) { // if the selected type is ture and add the followings
         filteredApiLink += (filteredApiLink.includes("?") ? "&" : "?") + `by_type=${selectedType}&per_page=10`;
       }
 
       //console.log(filteredApiLink);
-
+      // making api requst
       axios.get(filteredApiLink).then((resp) => {
         this.store.breweries = resp.data;
       }).catch((error) => {
         console.error("API Request Error:", error);
       });
 
-
     },
+    //Functions to get api results with the parameter of selected type by the user
+    filterApiResults(selectedType) {
+      this.getApiResults(selectedType);
+    },
+
+
   },
   mounted() {
-    this.getApiResults(this.store.selectedItem);
+    this.getApiResults();
   },
 }
 
