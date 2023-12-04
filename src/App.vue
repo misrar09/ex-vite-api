@@ -25,10 +25,12 @@ export default {
     getApiResults(selectedType) {
       let filteredApiLink = this.store.apiLink;
       if (selectedType) { // if the selected type is ture and add the followings
-        filteredApiLink += (filteredApiLink.includes("?") ? "&" : "?") + `by_type=${selectedType}&per_page=10`;
+        // the following two lines of codes works the same in our case:
+        //filteredApiLink += (filteredApiLink.includes("?") ? "&" : "?") + `by_type=${selectedType}&per_page=10`; 
+        filteredApiLink += "&" + `by_type=${selectedType}&per_page=10`;
       }
 
-      //console.log(filteredApiLink);
+      console.log(filteredApiLink);
       // making api requst
       axios.get(filteredApiLink).then((resp) => {
         this.store.breweries = resp.data;
